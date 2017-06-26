@@ -1,5 +1,6 @@
 :data-transition-duration: 200
 :css: css/presentation.css
+:data-rotate-x: 20
 
 .. title:: Systemd
 
@@ -17,7 +18,7 @@
 whoami
 ======
 
-.. code-block::
+::
 
    # getent passwd ssm
    ssm:x:1000:1000:Stig Sandbeck Mathisen:/home/ssm:/bin/zsh
@@ -163,7 +164,7 @@ Systemd unit types
 * device
 * mount
 * ...
-  
+
 ----
 
 systemctl
@@ -184,16 +185,16 @@ service status
 
    ssm@eris:~$ systemctl status rsyslog
    ● rsyslog.service - System Logging Service
-      Loaded: loaded (/lib/systemd/system/rsyslog.service; enabled; vendor preset: 
+      Loaded: loaded (/lib/systemd/system/rsyslog.service; enabled; vendor preset:
       Active: active (running) since Wed 2017-06-21 06:23:15 CEST; 5 days ago
-        Docs: man:rsyslogd(8)
-              http://www.rsyslog.com/doc/
+	Docs: man:rsyslogd(8)
+	      http://www.rsyslog.com/doc/
     Main PID: 642 (rsyslogd)
        Tasks: 4 (limit: 4915)
       Memory: 4.6M
-         CPU: 1.281s
+	 CPU: 1.281s
       CGroup: /system.slice/rsyslog.service
-              └─642 /usr/sbin/rsyslogd -n
+	      └─642 /usr/sbin/rsyslogd -n
 
 ----
 
@@ -202,19 +203,19 @@ multi process service status
 
 ::
 
-   ssm@eris:~$ systemctl status postfix@-.service 
+   ssm@eris:~$ systemctl status postfix@-.service
    ● postfix@-.service - Postfix Mail Transport Agent (instance -)
       Loaded: loaded (/lib/systemd/system/postfix@.service; disabled; vendor preset
       Active: active (running) since Wed 2017-06-21 06:23:20 CEST; 5 days ago
-        Docs: man:postfix(1)
+	Docs: man:postfix(1)
      Process: 13129 ExecReload=/usr/sbin/postmulti -i - -p reload (code=exited, sta
      Process: 1074 ExecStart=/usr/sbin/postmulti -i - -p start (code=exited, status
      Process: 1012 ExecStartPre=/usr/lib/postfix/configure-instance.sh - (code=exit
        Tasks: 3 (limit: 4915)
       CGroup: /system.slice/system-postfix.slice/postfix@-.service
-              ├─ 1181 /usr/lib/postfix/sbin/master -w
-              ├─13142 qmgr -l -t unix -u
-              └─19646 pickup -l -t unix -u -c
+	      ├─ 1181 /usr/lib/postfix/sbin/master -w
+	      ├─13142 qmgr -l -t unix -u
+	      └─19646 pickup -l -t unix -u -c
 
 ----
 
@@ -288,7 +289,7 @@ Automatic restarts
    Restart=always
 
 .. note::
-   
+
    Sometimes processes die. Particularly at inconvenient times, it
    seems. In many cases, the fix is to “restart it, and figure out the
    cause later”. You can configure systemd to restart your service. If
@@ -432,8 +433,15 @@ Journal
 journalctl
 ==========
 
-Examples:
+::
 
-* journalctl -p3 -b
-* journalctl -u postfix.service
-* journalctl -f
+   # journalctl -p3 -b
+   # journalctl -u postfix.service
+   # journalctl -f
+
+---
+
+That's it
+=========
+
+Thank you!
