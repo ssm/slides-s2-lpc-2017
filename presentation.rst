@@ -46,7 +46,11 @@ PID 1 alternatives
 
    SMF on Solaris, Lots of XML
 
-   Launchd on Macos, Lots of property lists (XML, or binary)
+   Launchd on Macos. Released in 2005.  Lots of property lists (XML,
+   or binary)
+
+   Daemontools from DJB.  Released in 2001. Not very POSIX, but solved
+   a lot of problems.
 
 ----
 
@@ -162,6 +166,54 @@ Systemd unit types
   
 ----
 
+systemctl
+=========
+
+* systemctl start
+* systemctl stop
+* systemctl restart
+* systemctl status
+* ...
+
+----
+
+systemd-cgls
+============
+
+::
+
+   Control group /:
+   -.slice
+   ├─user.slice
+   │ ├─user-117.slice
+   │ │ ├─user@117.service
+   │ │ │ ├─pulseaudio.service
+   ...
+   └─system.slice
+   ├─system-postfix.slice
+   │ └─postfix@-.service
+   │   ├─ 1181 /usr/lib/postfix/sbin/master -w
+   │   ├─13142 qmgr -l -t unix -u
+   │   └─19646 pickup -l -t unix -u -c
+
+----
+
+systemd-cgtop
+=============
+
+::
+
+   Control Group                   Tasks   %CPU   Memory  Input/s Output/s
+   /                                   -   13.8     4.8G        -        -
+   /user.slice                       487   13.0     3.9G        -        -
+   /system.slice                      91    0.3   442.9M        -        -
+   /system.slice/docker.service       33    0.3   100.3M        -        -
+   /docker                             -      -   136.0K        -        -
+   /init.scope                         1      -     8.1M        -        -
+   ...
+
+----
+
 Some systemd features
 =====================
 
@@ -186,7 +238,12 @@ Automatic restarts
 
 .. code-block:: ini
 
+   [Unit]
+   Description=Enterpricy Software by Undead Vendor
+   Documentation=file:///dev/null man:hahaha(5)
+
    [Service]
+   ExecStart=/opt/ENTRprc/zbin/eeek
    Restart=always
 
 .. note::
@@ -312,3 +369,30 @@ Example output
 
    Here, we see that the “dovecot.service” unit has a number of listening
    ports, and one established session.
+
+----
+
+Logging
+=======
+
+Systemd logs to the journal.
+
+----
+
+Journal
+=======
+
+* Binary
+* Structured
+* Ephemeral or Persistent
+
+----
+
+journalctl
+==========
+
+Examples:
+
+* journalctl -p3 -b
+* journalctl -u postfix.service
+* journalctl -f
