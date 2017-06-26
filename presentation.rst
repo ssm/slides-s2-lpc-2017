@@ -28,8 +28,8 @@ whoami
 
 ----
 
-What is pid 1?
-==============
+pid 1?
+======
 
 ----
 
@@ -86,6 +86,8 @@ init script example
        ;;
    esac
 
+----
+
 systemd unit example
 ====================
 
@@ -114,6 +116,9 @@ Not entirely uncontroversial
 
 ----
 
+Debian chooses default init
+===========================
+
 .. image:: images/bts-727708-done.png
    :height: 313px
    :width: 658px
@@ -126,6 +131,9 @@ Not entirely uncontroversial
    are very much worth reading.
 
 ----
+
+Debian without systemd
+======================
 
 .. image:: images/devuan.org.png
    :height: 271px
