@@ -50,6 +50,7 @@ init script
      stop)
        stop_service
        ;;
+   esac
 
 ----
 
@@ -59,19 +60,7 @@ systemd
 * Modern init system
 * Service supervisor
 * Uses lots of modern features
-* Not entirely uncontroversial
-
-----
-
-.. image:: images/bts-727708-done.png
-   :height: 600px
-   :width: 800px
-
-----
-
-.. image:: images/devuan.org.png
-   :height: 600px
-   :width: 800px
+* Declarative syntax
 
 ----
 
@@ -95,6 +84,23 @@ systemd unit
    [Install]
    WantedBy=multi-user.target
    Alias=syslog.service
+
+----
+
+Not entirely uncontroversial
+============================
+
+----
+
+.. image:: images/bts-727708-done.png
+   :height: 313px
+   :width: 658px
+
+----
+
+.. image:: images/devuan.org.png
+   :height: 271px
+   :width: 847px
 
 ----
 
