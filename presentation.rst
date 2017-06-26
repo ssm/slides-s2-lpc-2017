@@ -20,9 +20,9 @@ whoami
 .. code-block::
 
    # getent passwd ssm
-   ssm:x:1000:1000:Stig Sandbeck Mathisen,,,:/home/ssm:/bin/zsh
+   ssm:x:1000:1000:Stig Sandbeck Mathisen:/home/ssm:/bin/zsh
 
-* Lead Infrastructure Engineer @ Sopra Steria
+* Lead Infrastructure Engineer
 * Debian Developer
 * Red Hat Certified Architect
 
@@ -42,10 +42,34 @@ PID 1 alternatives
 * Systemd
 * SMF
 
+.. note::
+
+   SMF on Solaris, Lots of XML
+
+   Launchd on Macos, Lots of property lists (XML, or binary)
+
 ----
 
-init script
-===========
+System V init
+=============
+
+* Reads /etc/inittab
+* Runs scripts in /etc/init.d/
+* Stateless
+
+----
+
+systemd
+=======
+
+* Declarative syntax
+* Service supervisor
+* Stateful
+
+----
+
+init script example
+===================
 
 .. code-block:: shell
 
@@ -62,20 +86,8 @@ init script
        ;;
    esac
 
-----
-
-systemd
-=======
-
-* Modern init system
-* Service supervisor
-* Uses lots of modern features
-* Declarative syntax
-
-----
-
-systemd unit
-============
+systemd unit example
+====================
 
 .. code-block:: ini
 
@@ -129,6 +141,18 @@ Not entirely uncontroversial
 
 ----
 
+Systemd unit types
+==================
+
+* service
+* socket
+* timer
+* target
+* device
+* mount
+* ...
+  
+----
 
 Some systemd features
 =====================
@@ -149,34 +173,33 @@ A few of systemd features that helps you and your fellow sysadmins.
 Automatic restarts
 ------------------
 
-Sometimes processes die. Particularly at inconvenient times, it
-seems. In many cases, the fix is to “restart it, and figure out the
-cause later”. You can configure systemd to restart your service. If
-the restart is successful, the service is not unavailable, and no SMS
-is sent.
+* Processes die
+* Automatic restart
 
 .. code-block:: ini
 
    [Service]
    Restart=always
 
-The “Restart=” directive tells systemd to restart the service if the
-process terminates. You can set it to “always”, or read the manual
-page to see if the other values make sense for you.
+.. note::
+   
+   Sometimes processes die. Particularly at inconvenient times, it
+   seems. In many cases, the fix is to “restart it, and figure out the
+   cause later”. You can configure systemd to restart your service. If
+   the restart is successful, the service is not unavailable, and no
+   SMS is sent.
 
-Just ensure you follow up on unexpected service restarts. This is
-logged in the journal, and you should add this to your monitoring.
+   The “Restart=” directive tells systemd to restart the service if the
+   process terminates. You can set it to “always”, or read the manual
+   page to see if the other values make sense for you.
+
+   Just ensure you follow up on unexpected service restarts. This is
+   logged in the journal, and you should add this to your monitoring.
 
 ----
 
 Improved documentation
 ----------------------
-
-Not all services are well known, or well documented. The on-call
-personnel may not be the one responsible for the architecture or the
-day-to-day operations for that server.
-
-# create /etc/systemd/system/mystery.service.d/documentation.conf
 
 .. code-block:: ini
 
@@ -186,16 +209,22 @@ day-to-day operations for that server.
      man:mysteryd(8) \
      file:///opt/mystery/doc/index.html
 
-The content of the “Documentation=” directive is visible when running
-“systemctl status servicename”. This helps your on-call person, when
-the alarm goes off, to figure out what is wrong, and how to fix
-it. Add your own service documentation, and a link to the upstream
-documentation.
-
 .. note::
+
+   Not all services are well known, or well documented. The on-call
+   personnel may not be the one responsible for the architecture or
+   the day-to-day operations for that server.
+
+   The content of the “Documentation=” directive is visible when
+   running “systemctl status servicename”. This helps your on-call
+   person, when the alarm goes off, to figure out what is wrong, and
+   how to fix it. Add your own service documentation, and a link to
+   the upstream documentation.
 
    You don’t need to edit the original unit file, you can add a drop-in
    file in /etc/systemd/system/<yourservice>.d/<something>.conf:
+
+   # create /etc/systemd/system/mystery.service.d/documentation.conf
 
 ----
 
@@ -229,12 +258,10 @@ Show connections for a service
 ------------------------------
 
 Systemd tracks all processes per service by placing them in the same
-cgroup. Using “ps”, “awk” and “lsof”, we can print network connections
-for a single service, across multiple processes.
+cgroup.
 
-The oneliner
-
-…ironically enough not on one line
+Using “ps”, “awk” and “lsof”, we can print network connections for a
+single service, across multiple processes.
 
 .. code-block:: shell
 
