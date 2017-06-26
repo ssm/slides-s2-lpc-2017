@@ -439,7 +439,7 @@ journalctl
    # journalctl -u postfix.service
    # journalctl -f
 
----
+----
 
 That's it
 =========
