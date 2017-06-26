@@ -1,6 +1,16 @@
 :data-transition-duration: 200
+:css: css/presentation.css
 
 .. title:: Systemd
+
+.. header::
+
+   .. image:: images/logo.jpg
+
+
+.. footer::
+
+    "systemd", Stig Sandbeck Mathisen, Sopra Steria 2017
 
 ----
 
