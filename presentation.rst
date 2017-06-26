@@ -23,6 +23,8 @@ PID 1 alternatives
 * Systemd
 * SMF
 
+----
+
 init script
 ===========
 
@@ -39,6 +41,8 @@ init script
      stop)
        stop_service
        ;;
+
+----
 
 systemd unit
 ============
@@ -61,6 +65,8 @@ systemd unit
    WantedBy=multi-user.target
    Alias=syslog.service
 
+----
+
    
 Some systemd features
 =====================
@@ -74,6 +80,8 @@ need help fixing it”.
 
 There are a couple of things you can do to avoid this.
 
+----
+
 Automatic restarts
 ------------------
 
@@ -82,6 +90,8 @@ seems. In many cases, the fix is to “restart it, and figure out the
 cause later”. You can configure systemd to restart your service. If
 the restart is successful, the service is not unavailable, and no SMS
 is sent.
+
+----
 
 .. code-block:: ini
 
@@ -95,6 +105,8 @@ page to see if the other values make sense for you.
 Just ensure you follow up on unexpected service restarts. This is
 logged in the journal, and you should add this to your monitoring.
 
+----
+
 Improved documentation
 ----------------------
 
@@ -104,6 +116,8 @@ day-to-day operations for that server.
 
 You don’t need to edit the original unit file, you can add a drop-in
 file in /etc/systemd/system/<yourservice>.d/<something>.conf:
+
+----
 
 # create /etc/systemd/system/mystery.service.d/documentation.conf
 
@@ -120,6 +134,8 @@ The content of the “Documentation=” directive is visible when running
 the alarm goes off, to figure out what is wrong, and how to fix
 it. Add your own service documentation, and a link to the upstream
 documentation.
+
+----
 
 The output will look like this:
 
@@ -145,12 +161,16 @@ The output will look like this:
   Nov 28 06:25:01 turbotape systemd[1]: Started MYSTERY Scheduler.
 
 
+----
+
 Show connections for a service
 ------------------------------
 
 Systemd tracks all processes per service by placing them in the same
 cgroup. Using “ps”, “awk” and “lsof”, we can print network connections
 for a single service, across multiple processes.
+
+----
 
 The oneliner
 
@@ -161,6 +181,8 @@ The oneliner
    ps -e -o pid,cgroup \
      | awk '$2 ~ /dovecot.service/ {print "-p", $1}' \
      | xargs -r lsof -n -i -a
+
+----
 
 What does it do?
 
@@ -174,6 +196,8 @@ The example lists all processes started by “dovecot.service”.
 
 * Use “xargs” to take the “-p $pid” lines from STDIN, and add them to
   the “lsof” command line.
+
+----
 
 Example output
 
