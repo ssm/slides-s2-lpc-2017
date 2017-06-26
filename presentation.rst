@@ -67,7 +67,7 @@ systemd
 
 ----
 
-.. image:: images/devuan.png
+.. image:: images/devuan.org.png
 
 ----
 
