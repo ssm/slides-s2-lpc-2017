@@ -4,8 +4,17 @@
 
 ----
 
-* pid 1
-* alternatives
+whoami
+======
+
+.. code-block::
+
+   # getent passwd ssm
+   ssm:x:1000:1000:Stig Sandbeck Mathisen,,,:/home/ssm:/bin/zsh
+
+* Lead Infrastructure Engineer @ Sopra Steria
+* Debian Developer
+* Red Hat Certified Architect
 
 ----
 
@@ -41,6 +50,24 @@ init script
      stop)
        stop_service
        ;;
+
+----
+
+systemd
+=======
+
+* Modern init system
+* Service supervisor
+* Uses lots of modern features
+* Not entirely uncontroversial
+
+----
+
+.. image:: images/bts-727708-done.png
+
+----
+
+.. image:: images/devuan.png
 
 ----
 
