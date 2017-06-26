@@ -64,12 +64,14 @@ systemd
 ----
 
 .. image:: images/bts-727708-done.png
-   :scale: 50%
+   :height: 600px
+   :width: 800px
 
 ----
 
 .. image:: images/devuan.org.png
-   :scale: 50%
+   :height: 600px
+   :width: 800px
 
 ----
 
