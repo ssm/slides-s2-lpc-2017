@@ -13,6 +13,14 @@
 
     "systemd", Stig Sandbeck Mathisen, Sopra Steria 2017
 
+
+systemd
+=======
+
+Sopra Steria, Linux Private Cloud
+
+2017-06-27
+
 ----
 
 whoami
