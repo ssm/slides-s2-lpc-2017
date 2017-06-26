@@ -181,6 +181,7 @@ service status
 ==============
 
 ::
+
    ssm@eris:~$ systemctl status rsyslog
    ● rsyslog.service - System Logging Service
       Loaded: loaded (/lib/systemd/system/rsyslog.service; enabled; vendor preset: 
